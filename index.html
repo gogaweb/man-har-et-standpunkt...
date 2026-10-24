@@ -208,12 +208,74 @@
     }
 
     #saetning {
-      margin: 22px 0 26px;
+      margin: 22px 0 22px;
       color: #282036;
       font-size: clamp(1.3rem, 3.5vw, 1.8rem);
       font-weight: 650;
       line-height: 1.5;
       text-wrap: pretty;
+    }
+
+    .timer {
+      margin: 0 auto 24px;
+      max-width: 480px;
+      padding: 15px 17px 13px;
+      border: 1px solid #e5d8c8;
+      border-radius: 16px;
+      background: #fffdf8;
+    }
+
+    .timer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: #342744;
+      font-weight: 800;
+    }
+
+    #timer-tal {
+      font-size: 1.35rem;
+      font-variant-numeric: tabular-nums;
+      color: #39803b;
+      white-space: nowrap;
+    }
+
+    .timer-spor {
+      height: 18px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e9e3ed;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    }
+
+    #timer-bjaelke {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: #65a30d;
+      transition: width 0.9s linear, background-color 0.3s ease;
+    }
+
+    #timer-bjaelke.gul {
+      background: #eab308;
+    }
+
+    #timer-bjaelke.roed {
+      background: #dc4545;
+    }
+
+    #timer-status {
+      min-height: 1.4em;
+      margin: 9px 0 0;
+      color: #5f5367;
+      font-size: 0.92rem;
+      font-weight: 650;
+    }
+
+    #timer-status.udloebet {
+      color: #b42323;
     }
 
     #spil button {
@@ -303,6 +365,18 @@
     <div id="spil">
       <h2 id="overskrift"></h2>
       <p id="saetning">Indlæser sætninger...</p>
+
+      <div class="timer" role="group" aria-label="Nedtælling på 45 sekunder">
+        <div class="timer-top">
+          <span>⏳ Tid til at diskutere!</span>
+          <span id="timer-tal" aria-live="off">00:45</span>
+        </div>
+        <div class="timer-spor" role="progressbar" aria-label="Tid tilbage" aria-valuemin="0" aria-valuemax="45" aria-valuenow="45" id="timer-spor">
+          <div id="timer-bjaelke"></div>
+        </div>
+        <p id="timer-status" aria-live="polite">Klar? Snakken starter nu!</p>
+      </div>
+
       <button onclick="visSaetning()">Træk en sætning</button>
     </div>
 
@@ -313,6 +387,56 @@
 
   <script>
     let saetninger = [];
+    const timerLaengde = 45;
+    let timerInterval = null;
+    let sekunderTilbage = timerLaengde;
+
+    function stopTimer() {
+      if (timerInterval !== null) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    function opdaterTimer() {
+      const minutter = Math.floor(sekunderTilbage / 60);
+      const sekunder = sekunderTilbage % 60;
+      document.getElementById("timer-tal").textContent =
+        String(minutter).padStart(2, "0") + ":" + String(sekunder).padStart(2, "0");
+
+      const procent = (sekunderTilbage / timerLaengde) * 100;
+      const bjaelke = document.getElementById("timer-bjaelke");
+      bjaelke.style.width = procent + "%";
+      bjaelke.classList.toggle("gul", sekunderTilbage <= 30 && sekunderTilbage > 15);
+      bjaelke.classList.toggle("roed", sekunderTilbage <= 15);
+
+      document.getElementById("timer-spor").setAttribute("aria-valuenow", sekunderTilbage);
+      document.getElementById("timer-tal").style.color =
+        sekunderTilbage <= 15 ? "#b42323" : sekunderTilbage <= 30 ? "#9a6700" : "#39803b";
+
+      const status = document.getElementById("timer-status");
+      status.classList.toggle("udloebet", sekunderTilbage === 0);
+      if (sekunderTilbage === 0) {
+        status.textContent = "⏰ Tiden er gået! Træk en ny sætning.";
+        stopTimer();
+      } else if (sekunderTilbage <= 10) {
+        status.textContent = "🔴 Sidste sekunder!";
+      } else if (sekunderTilbage <= 20) {
+        status.textContent = "🟡 Nu er der ikke så længe igen!";
+      } else {
+        status.textContent = "🟢 God tid endnu – fortsæt snakken!";
+      }
+    }
+
+    function startTimer() {
+      stopTimer();
+      sekunderTilbage = timerLaengde;
+      opdaterTimer();
+      timerInterval = setInterval(() => {
+        sekunderTilbage = Math.max(0, sekunderTilbage - 1);
+        opdaterTimer();
+      }, 1000);
+    }
 
     function vaelgVersion(version) {
       const fil = version === "boern"
@@ -360,9 +484,19 @@
       const nummer = Math.floor(Math.random() * saetninger.length);
       document.getElementById("saetning").textContent =
         saetninger[nummer];
+      startTimer();
     }
 
     function gaaTilbage() {
+      stopTimer();
+      sekunderTilbage = timerLaengde;
+      document.getElementById("timer-tal").textContent = "00:45";
+      document.getElementById("timer-bjaelke").style.width = "100%";
+      document.getElementById("timer-bjaelke").classList.remove("gul", "roed");
+      document.getElementById("timer-tal").style.color = "#39803b";
+      document.getElementById("timer-spor").setAttribute("aria-valuenow", timerLaengde);
+      document.getElementById("timer-status").textContent = "Klar? Snakken starter nu!";
+      document.getElementById("timer-status").classList.remove("udloebet");
       document.getElementById("start").style.display = "block";
       document.getElementById("spil").style.display = "none";
       document.getElementById("tilbage").style.display = "none";
