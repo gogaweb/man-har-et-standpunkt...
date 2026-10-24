@@ -216,6 +216,13 @@
       text-wrap: pretty;
     }
 
+#argument-retning {
+margin: -8px 0 22px;
+color: var(--purple);
+font-size: 1rem;
+font-weight: 800;
+}
+    
     .timer {
       margin: 0 auto 24px;
       max-width: 480px;
@@ -365,6 +372,7 @@
     <div id="spil">
       <h2 id="overskrift"></h2>
       <p id="saetning">Indlæser sætninger...</p>
+      <p id="argument-retning"></p>
 
       <div class="timer" role="group" aria-label="Nedtælling på 45 sekunder">
         <div class="timer-top">
@@ -387,6 +395,12 @@
 
   <script>
     let saetninger = [];
+
+const argumentRetninger = [
+"👍 Argumentér FOR udsagnet",
+"😈 Djævlens advokat: Argumentér IMOD udsagnet"
+];
+    
     const timerLaengde = 45;
     let timerInterval = null;
     let sekunderTilbage = timerLaengde;
@@ -479,13 +493,25 @@
         });
     }
 
-    function visSaetning() {
-      if (saetninger.length === 0) return;
-      const nummer = Math.floor(Math.random() * saetninger.length);
-      document.getElementById("saetning").textContent =
-        saetninger[nummer];
-      startTimer();
-    }
+function visSaetning() {
+if (saetninger.length === 0) return;
+ 
+const nummer = Math.floor(Math.random() * saetninger.length);
+ 
+document.getElementById("saetning").textContent =
+saetninger[nummer];
+ 
+const retning =
+argumentRetninger[
+Math.floor(Math.random() * argumentRetninger.length)
+];
+ 
+document.getElementById("argument-retning").textContent =
+retning;
+ 
+startTimer();
+}
+    
 
     function gaaTilbage() {
       stopTimer();
@@ -500,6 +526,9 @@
       document.getElementById("start").style.display = "block";
       document.getElementById("spil").style.display = "none";
       document.getElementById("tilbage").style.display = "none";
+
+        document.getElementById("argument-retning").textContent = "";
+
     }
   </script>
 
