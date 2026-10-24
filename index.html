@@ -3,99 +3,134 @@
 <html lang="da">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Man har et standpunkt</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> For-nytår 2026-27: Man har et standpunkt</title>
   <style>
     body {
-      font-family: system-ui, sans-serif;
+      font-family: Arial, sans-serif;
       max-width: 700px;
-      margin: 70px auto;
-      padding: 24px;
+      margin: 60px auto;
+      padding: 20px;
       text-align: center;
-      background: #f4f1ea;
-      color: #242424;
+      background: #f5f3ee;
+      color: #252525;
     }
 
     h1 {
-      font-size: 2.2rem;
-    }
-
-    #saetning {
-      min-height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      line-height: 1.5;
-      margin: 30px 0;
+      font-size: 2.2em;
     }
 
     button {
-      background: #245b48;
-      color: white;
-      border: 0;
-      padding: 14px 24px;
+      padding: 14px 22px;
+      margin: 8px;
+      border: none;
       border-radius: 8px;
-      font-size: 1rem;
+      background: #315b50;
+      color: white;
+      font-size: 1em;
       cursor: pointer;
     }
 
     button:hover {
-      background: #173e31;
+      background: #24453d;
+    }
+
+    #saetning {
+      font-size: 1.5em;
+      line-height: 1.5;
+      margin: 35px 0;
+    }
+
+    #spil, #tilbage {
+      display: none;
     }
   </style>
 </head>
-
 <body>
+
   <h1>Man har et standpunkt</h1>
-  <p>Træk en sætning, og argumentér for standpunktet.</p>
 
-  <div id="saetning">Henter sætninger...</div>
+  <div id="start">
+    <p>Vælg den version, I vil spille.</p>
+    <button onclick="vaelgVersion('foraeldre')">
+      Forældreversionen
+    </button>
+    <button onclick="vaelgVersion('boern')">
+      Børneversionen
+    </button>
+  </div>
 
-  <button onclick="visSaetning()">Træk en sætning</button>
+  <div id="spil">
+    <h2 id="overskrift"></h2>
+    <p id="saetning">Indlæser sætninger...</p>
+    <button onclick="visSaetning()">Træk en sætning</button>
+  </div>
 
+  <button id="tilbage" onclick="gaaTilbage()">
+    Tilbage til valg
+  </button>
 
-<script>
-let saetninger = [];
+  <script>
+    let saetninger = [];
 
-fetch("saetninger.json")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Filen blev ikke fundet");
+    function vaelgVersion(version) {
+      const fil = version === "boern"
+        ? "boern.txt"
+        : "saetninger.json";
+
+      document.getElementById("start").style.display = "none";
+      document.getElementById("spil").style.display = "block";
+      document.getElementById("tilbage").style.display = "inline-block";
+
+      document.getElementById("overskrift").textContent =
+        version === "boern" ? "Børneversionen" : "Forældreversionen";
+
+      document.getElementById("saetning").textContent =
+        "Indlæser sætninger...";
+
+      saetninger = [];
+
+      fetch(fil)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Filen blev ikke fundet: " + fil);
+          }
+          return response.text();
+        })
+        .then(tekst => {
+          saetninger = tekst
+            .split(/\r?\n/)
+            .map(linje => linje.trim())
+            .filter(linje => /^\d+\.\s/.test(linje))
+            .map(linje => linje.replace(/^\d+\.\s*/, ""));
+
+          if (saetninger.length === 0) {
+            throw new Error("Ingen nummererede sætninger fundet");
+          }
+
+          visSaetning();
+        })
+        .catch(error => {
+          document.getElementById("saetning").textContent =
+            "Kunne ikke indlæse sætningerne. Kontrollér filen.";
+          console.error(error);
+        });
     }
-    return response.text();
-  })
-  .then(tekst => {
-    saetninger = tekst
-      .split(/\r?\n/)
-      .map(linje => linje.trim())
-      .filter(linje => /^\d+\.\s/.test(linje))
-      .map(linje => linje.replace(/^\d+\.\s*/, ""));
 
-    if (saetninger.length === 0) {
-      throw new Error("Ingen nummererede sætninger fundet");
+    function visSaetning() {
+      if (saetninger.length === 0) return;
+
+      const nummer = Math.floor(Math.random() * saetninger.length);
+      document.getElementById("saetning").textContent =
+        saetninger[nummer];
     }
 
-    visSaetning();
-  })
-  .catch(error => {
-    document.getElementById("saetning").textContent =
-      "Kunne ikke indlæse sætningerne.";
-    console.error(error);
-  });
+    function gaaTilbage() {
+      document.getElementById("start").style.display = "block";
+      document.getElementById("spil").style.display = "none";
+      document.getElementById("tilbage").style.display = "none";
+    }
+  </script>
 
-function visSaetning() {
-  if (saetninger.length === 0) return;
-
-  const nummer = Math.floor(Math.random() * saetninger.length);
-
-  document.getElementById("saetning").textContent =
-    saetninger[nummer];
-}
-</script>
-
-
-  
 </body>
 </html>
