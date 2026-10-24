@@ -55,41 +55,47 @@
 
   <button onclick="visSaetning()">Træk en sætning</button>
 
-  <script>
-    let saetninger = [];
 
-    fetch("saetninger.json")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Filen blev ikke fundet");
-        }
-        return response.json();
-      })
-      .then(data => {
-        saetninger = data;
+<script>
+let saetninger = [];
 
-        if (saetninger.length === 0) {
-          document.getElementById("saetning").textContent =
-            "Der er ingen sætninger i databanken.";
-          return;
-        }
-
-        visSaetning();
-      })
-      .catch(error => {
-        document.getElementById("saetning").textContent =
-          "Kunne ikke hente sætningerne. Kontrollér saetninger.json.";
-        console.error(error);
-      });
-
-    function visSaetning() {
-      if (saetninger.length === 0) return;
-
-      const nummer = Math.floor(Math.random() * saetninger.length);
-
-      document.getElementById("saetning").textContent =
-        saetninger[nummer];
+fetch("saetninger.json")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Filen blev ikke fundet");
     }
-  </script>
+    return response.text();
+  })
+  .then(tekst => {
+    saetninger = tekst
+      .split(/\r?\n/)
+      .map(linje => linje.trim())
+      .filter(linje => /^\d+\.\s/.test(linje))
+      .map(linje => linje.replace(/^\d+\.\s*/, ""));
+
+    if (saetninger.length === 0) {
+      throw new Error("Ingen nummererede sætninger fundet");
+    }
+
+    visSaetning();
+  })
+  .catch(error => {
+    document.getElementById("saetning").textContent =
+      "Kunne ikke indlæse sætningerne.";
+    console.error(error);
+  });
+
+function visSaetning() {
+  if (saetninger.length === 0) return;
+
+  const nummer = Math.floor(Math.random() * saetninger.length);
+
+  document.getElementById("saetning").textContent =
+    saetninger[nummer];
+}
+</script>
+
+
+  
 </body>
 </html>
