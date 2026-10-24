@@ -1,74 +1,315 @@
-
 <!DOCTYPE html>
 <html lang="da">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> For-nytår 2026-27: Man har et standpunkt</title>
+  <meta name="theme-color" content="#171326">
+  <title>For-nytår 2026-27: Man har et standpunkt</title>
   <style>
+    :root {
+      color-scheme: dark;
+      --night: #171326;
+      --night-soft: #211a35;
+      --panel: #fff8ec;
+      --panel-text: #282036;
+      --muted-text: #675a70;
+      --orange: #e87528;
+      --orange-hover: #c85b18;
+      --purple: #65449b;
+      --purple-hover: #4f327f;
+      --border: rgba(255, 255, 255, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--night);
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 20px;
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
+      margin: 0;
+      padding: 54px 18px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       text-align: center;
-      background: #f5f3ee;
-      color: #252525;
+      color: var(--panel-text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(112, 75, 158, 0.30), transparent 29rem),
+        radial-gradient(circle at 88% 72%, rgba(224, 104, 37, 0.17), transparent 27rem),
+        linear-gradient(145deg, #171326 0%, #241a3b 52%, #171326 100%);
+      overflow-x: hidden;
+    }
+
+    /* Måne og stjerner i baggrunden – helt selvstændig grafik uden eksterne filer. */
+    body::before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      top: 5vh;
+      right: 8vw;
+      width: clamp(76px, 10vw, 132px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #ffe7a8;
+      box-shadow:
+        0 0 32px rgba(255, 222, 145, 0.28),
+        0 0 90px rgba(255, 222, 145, 0.12);
+      opacity: 0.92;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "✦     ·       ✧             ·       ✦       ·             ✧";
+      position: fixed;
+      z-index: -1;
+      inset: 4% 3% auto;
+      height: 90vh;
+      color: rgba(255, 235, 190, 0.58);
+      font-size: clamp(16px, 2vw, 26px);
+      letter-spacing: 1.1em;
+      line-height: 3.6;
+      overflow: hidden;
+      pointer-events: none;
+      white-space: normal;
+    }
+
+    .scene-decoration {
+      position: fixed;
+      z-index: -1;
+      bottom: 1.5rem;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 clamp(12px, 5vw, 72px);
+      font-size: clamp(30px, 5vw, 62px);
+      opacity: 0.92;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+    }
+
+    .scene-decoration span:nth-child(2) {
+      align-self: flex-start;
+      margin-top: -25vh;
+      font-size: 0.58em;
+      opacity: 0.78;
+    }
+
+    main {
+      width: min(100%, 760px);
+      padding: clamp(26px, 5vw, 48px);
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.32),
+        0 0 0 7px rgba(255, 255, 255, 0.045);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--purple);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
     h1 {
-      font-size: 2.2em;
+      margin: 0 auto 18px;
+      max-width: 650px;
+      color: #2a2038;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+
+    h1 span {
+      display: block;
+      margin-top: 9px;
+      color: var(--orange);
+    }
+
+    #start > p {
+      margin: 0 auto 22px;
+      color: var(--muted-text);
+      font-size: 1.08rem;
+      line-height: 1.55;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
     }
 
     button {
-      padding: 14px 22px;
-      margin: 8px;
-      border: none;
-      border-radius: 8px;
-      background: #315b50;
-      color: white;
-      font-size: 1em;
+      min-height: 48px;
+      padding: 14px 21px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--orange);
+      color: #fff;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 750;
+      line-height: 1.3;
       cursor: pointer;
+      box-shadow: 0 4px 0 rgba(111, 48, 15, 0.16);
+      transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
     }
 
     button:hover {
-      background: #24453d;
+      background: var(--orange-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 rgba(111, 48, 15, 0.13);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 0 rgba(111, 48, 15, 0.13);
+    }
+
+    button:focus-visible {
+      outline: 3px solid #29203a;
+      outline-offset: 4px;
+    }
+
+    #start button:nth-of-type(2) {
+      background: var(--purple);
+    }
+
+    #start button:nth-of-type(2):hover {
+      background: var(--purple-hover);
+    }
+
+    #spil {
+      margin-top: 26px;
+      padding-top: 24px;
+      border-top: 1px solid #e7dccc;
+    }
+
+    #overskrift {
+      margin: 0;
+      color: var(--purple);
+      font-size: 1.1rem;
+      font-weight: 800;
     }
 
     #saetning {
-      font-size: 1.5em;
+      margin: 22px 0 26px;
+      color: #282036;
+      font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+      font-weight: 650;
       line-height: 1.5;
-      margin: 35px 0;
+      text-wrap: pretty;
+    }
+
+    #spil button {
+      background: var(--orange);
+    }
+
+    #tilbage {
+      margin-top: 18px;
+      background: transparent;
+      color: var(--purple);
+      border: 1px solid #c9b9dc;
+      box-shadow: none;
+    }
+
+    #tilbage:hover {
+      background: #eee5f7;
+      box-shadow: none;
     }
 
     #spil, #tilbage {
       display: none;
     }
+
+    @media (max-width: 560px) {
+      body {
+        justify-content: flex-start;
+        padding: 26px 12px 90px;
+      }
+
+      body::before {
+        top: 2vh;
+        right: -12px;
+        opacity: 0.55;
+      }
+
+      main {
+        padding: 27px 19px;
+        border-radius: 19px;
+      }
+
+      .button-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #start button {
+        width: 100%;
+        margin: 0;
+      }
+
+      .scene-decoration {
+        bottom: 8px;
+        padding: 0 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      button {
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <h1>Det store for-nytårsspil 2026-27: <br> Man har et standpunkt</h1>
-
-  <div id="start">
-    <p>Vælg den version, I vil spille.</p>
-    <button onclick="vaelgVersion('foraeldre')">
-      Forældreversionen/GVFB
-    </button>
-    <button onclick="vaelgVersion('boern')">
-      Børneversionen/Paw Patrol/Bluey
-    </button>
+  <div class="scene-decoration" aria-hidden="true">
+    <span>🎃</span>
+    <span>🦇</span>
+    <span>🎃</span>
   </div>
 
-  <div id="spil">
-    <h2 id="overskrift"></h2>
-    <p id="saetning">Indlæser sætninger...</p>
-    <button onclick="visSaetning()">Træk en sætning</button>
-  </div>
+  <main>
+    <p class="eyebrow">En aften med stærke holdninger</p>
+    <h1>Det store for-nytårsspil 2026-27:<span>Man har et standpunkt</span></h1>
 
-  <button id="tilbage" onclick="gaaTilbage()">
-    Tilbage til valg
-  </button>
+    <div id="start">
+      <p>Vælg den version, I vil spille.</p>
+      <div class="button-row">
+        <button onclick="vaelgVersion('foraeldre')">
+          Forældreversionen/GVFB
+        </button>
+        <button onclick="vaelgVersion('boern')">
+          Børneversionen/Paw Patrol/Bluey
+        </button>
+      </div>
+    </div>
+
+    <div id="spil">
+      <h2 id="overskrift"></h2>
+      <p id="saetning">Indlæser sætninger...</p>
+      <button onclick="visSaetning()">Træk en sætning</button>
+    </div>
+
+    <button id="tilbage" onclick="gaaTilbage()">
+      Tilbage til valg
+    </button>
+  </main>
 
   <script>
     let saetninger = [];
@@ -84,12 +325,10 @@
 
       document.getElementById("overskrift").textContent =
         version === "boern" ? "Børneversionen" : "Forældreversionen";
-
       document.getElementById("saetning").textContent =
         "Indlæser sætninger...";
 
       saetninger = [];
-
       fetch(fil)
         .then(response => {
           if (!response.ok) {
@@ -103,7 +342,6 @@
             .map(linje => linje.trim())
             .filter(linje => /^\d+\.\s/.test(linje))
             .map(linje => linje.replace(/^\d+\.\s*/, ""));
-
           if (saetninger.length === 0) {
             throw new Error("Ingen nummererede sætninger fundet");
           }
@@ -119,7 +357,6 @@
 
     function visSaetning() {
       if (saetninger.length === 0) return;
-
       const nummer = Math.floor(Math.random() * saetninger.length);
       document.getElementById("saetning").textContent =
         saetninger[nummer];
