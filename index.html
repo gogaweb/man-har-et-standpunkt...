@@ -43,19 +43,31 @@
   <button onclick="visSaetning()">Giv mig en sætning</button>
 
   <script>
-    const saetninger = [
-      "Historien gentager sig aldrig helt.",
-      "Verden er mere kompleks, end den ser ud.",
-      "Små spørgsmål kan føre til store opdagelser.",
-      "Det er lettere at være klog bagefter.",
-      "Et kort er ikke det samme som virkeligheden.",
-      "Nysgerrighed er begyndelsen på forståelse."
-    ];
+let saetninger = [];
 
-    function visSaetning() {
-      const nummer = Math.floor(Math.random() * saetninger.length);
-      document.getElementById("saetning").textContent =
-        saetninger[nummer];
+fetch("saetninger.json")
+  .then(response => response.json())
+  .then(data => {
+    saetninger = data;
+  })
+  .catch(error => {
+    document.getElementById("saetning").textContent =
+      "Kunne ikke hente sætningerne.";
+    console.error(error);
+  });
+
+function visSaetning() {
+  if (saetninger.length === 0) {
+    document.getElementById("saetning").textContent =
+      "Sætningerne indlæses stadig – prøv igen om lidt.";
+    return;
+  }
+
+  const nummer = Math.floor(Math.random() * saetninger.length);
+
+  document.getElementById("saetning").textContent =
+    saetninger[nummer];
+}
     }
   </script>
 </body>
