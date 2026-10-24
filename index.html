@@ -1,29 +1,95 @@
 
-<script>
-let saetninger = [];
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Man har et standpunkt</title>
 
-fetch("saetninger.json")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Filen blev ikke fundet");
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 700px;
+      margin: 70px auto;
+      padding: 24px;
+      text-align: center;
+      background: #f4f1ea;
+      color: #242424;
     }
-    return response.json();
-  })
-  .then(data => {
-    saetninger = data;
-    visSaetning();
-  })
-  .catch(error => {
-    document.getElementById("saetning").textContent =
-      "Kunne ikke hente sætningerne. Kontrollér filnavnet.";
-    console.error(error);
-  });
 
-function visSaetning() {
-  if (saetninger.length === 0) return;
+    h1 {
+      font-size: 2.2rem;
+    }
 
-  const nummer = Math.floor(Math.random() * saetninger.length);
-  document.getElementById("saetning").textContent =
-    saetninger[nummer];
-}
-</script>
+    #saetning {
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      line-height: 1.5;
+      margin: 30px 0;
+    }
+
+    button {
+      background: #245b48;
+      color: white;
+      border: 0;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #173e31;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Man har et standpunkt</h1>
+  <p>Træk en sætning, og argumentér for standpunktet.</p>
+
+  <div id="saetning">Henter sætninger...</div>
+
+  <button onclick="visSaetning()">Træk en sætning</button>
+
+  <script>
+    let saetninger = [];
+
+    fetch("saetninger.json")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Filen blev ikke fundet");
+        }
+        return response.json();
+      })
+      .then(data => {
+        saetninger = data;
+
+        if (saetninger.length === 0) {
+          document.getElementById("saetning").textContent =
+            "Der er ingen sætninger i databanken.";
+          return;
+        }
+
+        visSaetning();
+      })
+      .catch(error => {
+        document.getElementById("saetning").textContent =
+          "Kunne ikke hente sætningerne. Kontrollér saetninger.json.";
+        console.error(error);
+      });
+
+    function visSaetning() {
+      if (saetninger.length === 0) return;
+
+      const nummer = Math.floor(Math.random() * saetninger.length);
+
+      document.getElementById("saetning").textContent =
+        saetninger[nummer];
+    }
+  </script>
+</body>
+</html>
