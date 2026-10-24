@@ -1,117 +1,30 @@
-Det er bedre at have én rigtig god ven end ti almindelige venner.
-
-
-
-Man må gerne snyde lidt i et spil, hvis ingen opdager det.
-
-
-
-Voksne er meget dårligere til at lege end børn.
-
-
-
-Man skal altid fortælle sandheden, også selvom ens ven bliver ked af det.
-
-
-
-Det er værre at være en dårlig taber end en dårlig vinder.
-
-
-
-Man må gerne sige nej til at lege med nogen, selvom de gerne vil lege med én.
-
-
-
-Lektier burde være forbudt.
-
-
-
-Det er sjovere at være udenfor i regnvejr end at sidde indenfor med en skærm.
-
-
-
-Man skal ikke være venner med nogen, bare fordi de er søde ved én.
-
-
-
-Det er snyd, når voksne bestemmer reglerne i en leg.
-
-
-
-Det er bedre at være sjov end at være klog.
-
-
-
-Man må gerne lyve for at beskytte en ven.
-
-
-
-Det er mere spændende at være skurken end helten i en historie.
-
-
-
-Alle børn burde selv bestemme, hvornår de går i seng.
-
-
-
-Det er okay at grine, når en ven falder, hvis vennen også selv griner.
-
-
-
-Man skal have lov til at vælge sine egne hold i idræt.
-
-
-
-Det er bedre at kunne trylle end at kunne flyve.
-
-
-
-Man må gerne være stolt af at være den bedste til noget.
-
-
-
-Det er sjovere at bygge sin egen hule end at få en dyr gave.
-
-
-
-Drenge og piger kan ikke lide de samme lege.
-
-
-
-Hvis man taber et spil, skal man altid have lov til at spille igen med det samme.
-
-
-
-Det er bedre at have en lærer, der er sjov, end en lærer, der er god til at forklare.
-
-
-
-Man burde få penge for at hjælpe til derhjemme.
-
-
-
-Det er okay at bryde en regel, hvis reglen er dum.
-
-
-
-Man må gerne være venner med nogen, som ens andre venner ikke kan lide.
-
-
-
-Det er bedre at kunne tale med dyr end at kunne tale alle verdens sprog.
-
-
-
-Hvis man selv har lavet noget grimt i en kreativ opgave, må man gerne sige, at det er flot.
-
-
-
-Det er sjovere at være den, der finder på legen, end den, der bestemmer reglerne.
-
-
-
-Alle børn burde have lov til at bestemme én ting i familien.
-
-
-
-Man bliver ikke automatisk en god ven af at være sød hele tiden.
+1. Det er bedre at have én rigtig god ven end ti almindelige venner.
+2. Man må gerne snyde lidt i et spil, hvis ingen opdager det.
+3. Voksne er meget dårligere til at lege end børn.
+4. Man skal altid fortælle sandheden, også selvom ens ven bliver ked af det.
+5. Det er værre at være en dårlig taber end en dårlig vinder.
+6. Man må gerne sige nej til at lege med nogen, selvom de gerne vil lege med én.
+7. Lektier burde være forbudt.
+8. Det er sjovere at være udenfor i regnvejr end at sidde indenfor med en skærm.
+9. Man skal ikke være venner med nogen, bare fordi de er søde ved én.
+10. Det er snyd, når voksne bestemmer reglerne i en leg.
+11. Det er bedre at være sjov end at være klog.
+12. Man må gerne lyve for at beskytte en ven.
+13. Det er mere spændende at være skurken end helten i en historie.
+14. Alle børn burde selv bestemme, hvornår de går i seng.
+15. Det er okay at grine, når en ven falder, hvis vennen også selv griner.
+16. Man skal have lov til at vælge sine egne hold i idræt.
+17. Det er bedre at kunne trylle end at kunne flyve.
+18. Man må gerne være stolt af at være den bedste til noget.
+19. Det er sjovere at bygge sin egen hule end at få en dyr gave.
+20. Drenge og piger kan ikke lide de samme lege.
+21. Hvis man taber et spil, skal man altid have lov til at spille igen med det samme.
+22. Det er bedre at have en lærer, der er sjov, end en lærer, der er god til at forklare.
+23. Man burde få penge for at hjælpe til derhjemme.
+24. Det er okay at bryde en regel, hvis reglen er dum.
+25. Man må gerne være venner med nogen, som ens andre venner ikke kan lide.
+26. Det er bedre at kunne tale med dyr end at kunne tale alle verdens sprog.
+27. Hvis man selv har lavet noget grimt i en kreativ opgave, må man gerne sige, at det er flot.
+28. Det er sjovere at være den, der finder på legen, end den, der bestemmer reglerne.
+29. Alle børn burde have lov til at bestemme én ting i familien.
+30. Man bliver ikke automatisk en god ven af at være sød hele tiden.
