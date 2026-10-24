@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tilfældig sætning</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 650px;
+      margin: 80px auto;
+      padding: 24px;
+      text-align: center;
+      background: #f4f1ea;
+      color: #242424;
+    }
+    h1 { font-size: 2.2rem; }
+    #saetning {
+      min-height: 100px;
+      font-size: 1.5rem;
+      line-height: 1.5;
+      margin: 35px 0;
+    }
+    button {
+      background: #245b48;
+      color: white;
+      border: 0;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover { background: #173e31; }
+  </style>
+</head>
+<body>
+  <h1>Dagens sætning</h1>
+  <p>Tryk på knappen, og få en tilfældig sætning.</p>
+
+  <div id="saetning">Din sætning vises her.</div>
+
+  <button onclick="visSaetning()">Giv mig en sætning</button>
+
+  <script>
+    const saetninger = [
+      "Historien gentager sig aldrig helt.",
+      "Verden er mere kompleks, end den ser ud.",
+      "Små spørgsmål kan føre til store opdagelser.",
+      "Det er lettere at være klog bagefter.",
+      "Et kort er ikke det samme som virkeligheden.",
+      "Nysgerrighed er begyndelsen på forståelse."
+    ];
+
+    function visSaetning() {
+      const nummer = Math.floor(Math.random() * saetninger.length);
+      document.getElementById("saetning").textContent =
+        saetninger[nummer];
+    }
+  </script>
+</body>
+</html>
