@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171326">
+  <title>For-nytår 2026-27: Man har et standpunkt</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --night: #171326;
+      --night-soft: #211a35;
+      --panel: #fff8ec;
+      --panel-text: #282036;
+      --muted-text: #675a70;
+      --orange: #e87528;
+      --orange-hover: #c85b18;
+      --purple: #65449b;
+      --purple-hover: #4f327f;
+      --border: rgba(255, 255, 255, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--night);
+    }
+
+    body {
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
+      margin: 0;
+      padding: 54px 18px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-align: center;
+      color: var(--panel-text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(112, 75, 158, 0.30), transparent 29rem),
+        radial-gradient(circle at 88% 72%, rgba(224, 104, 37, 0.17), transparent 27rem),
+        linear-gradient(145deg, #171326 0%, #241a3b 52%, #171326 100%);
+      overflow-x: hidden;
+    }
+
+    /* Måne og stjerner i baggrunden – helt selvstændig grafik uden eksterne filer. */
+    body::before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      top: 5vh;
+      right: 8vw;
+      width: clamp(76px, 10vw, 132px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #ffe7a8;
+      box-shadow:
+        0 0 32px rgba(255, 222, 145, 0.28),
+        0 0 90px rgba(255, 222, 145, 0.12);
+      opacity: 0.92;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "✦     ·       ✧             ·       ✦       ·             ✧";
+      position: fixed;
+      z-index: -1;
+      inset: 4% 3% auto;
+      height: 90vh;
+      color: rgba(255, 235, 190, 0.58);
+      font-size: clamp(16px, 2vw, 26px);
+      letter-spacing: 1.1em;
+      line-height: 3.6;
+      overflow: hidden;
+      pointer-events: none;
+      white-space: normal;
+    }
+
+    .scene-decoration {
+      position: fixed;
+      z-index: -1;
+      bottom: 1.5rem;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 clamp(12px, 5vw, 72px);
+      font-size: clamp(30px, 5vw, 62px);
+      opacity: 0.92;
+      pointer-events: none;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+    }
+
+    .scene-decoration span:nth-child(2) {
+      align-self: flex-start;
+      margin-top: -25vh;
+      font-size: 0.58em;
+      opacity: 0.78;
+    }
+
+    main {
+      width: min(100%, 760px);
+      padding: clamp(26px, 5vw, 48px);
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.32),
+        0 0 0 7px rgba(255, 255, 255, 0.045);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--purple);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 auto 18px;
+      max-width: 650px;
+      color: #2a2038;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+
+    h1 span {
+      display: block;
+      margin-top: 9px;
+      color: var(--orange);
+    }
+
+    #start > p {
+      margin: 0 auto 22px;
+      color: var(--muted-text);
+      font-size: 1.08rem;
+      line-height: 1.55;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    button {
+      min-height: 48px;
+      padding: 14px 21px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--orange);
+      color: #fff;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 750;
+      line-height: 1.3;
+      cursor: pointer;
+      box-shadow: 0 4px 0 rgba(111, 48, 15, 0.16);
+      transition: transform 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+    }
+
+    button:hover {
+      background: var(--orange-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 rgba(111, 48, 15, 0.13);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 0 rgba(111, 48, 15, 0.13);
+    }
+
+    button:focus-visible {
+      outline: 3px solid #29203a;
+      outline-offset: 4px;
+    }
+
+    #start button:nth-of-type(2) {
+      background: var(--purple);
+    }
+
+    #start button:nth-of-type(2):hover {
+      background: var(--purple-hover);
+    }
+
+    #spil {
+      margin-top: 26px;
+      padding-top: 24px;
+      border-top: 1px solid #e7dccc;
+    }
+
+    #overskrift {
+      margin: 0;
+      color: var(--purple);
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    #saetning {
+      margin: 22px 0 22px;
+      color: #282036;
+      font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+      font-weight: 650;
+      line-height: 1.5;
+      text-wrap: pretty;
+    }
+
+#argument-retning {
+margin: -8px 0 22px;
+color: var(--purple);
+font-size: 1rem;
+font-weight: 800;
+}
+    
+    .timer {
+      margin: 0 auto 24px;
+      max-width: 480px;
+      padding: 15px 17px 13px;
+      border: 1px solid #e5d8c8;
+      border-radius: 16px;
+      background: #fffdf8;
+    }
+
+    .timer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: #342744;
+      font-weight: 800;
+    }
+
+    #timer-tal {
+      font-size: 1.35rem;
+      font-variant-numeric: tabular-nums;
+      color: #39803b;
+      white-space: nowrap;
+    }
+
+    .timer-spor {
+      height: 18px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e9e3ed;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.12);
+    }
+
+    #timer-bjaelke {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: #65a30d;
+      transition: width 0.9s linear, background-color 0.3s ease;
+    }
+
+    #timer-bjaelke.gul {
+      background: #eab308;
+    }
+
+    #timer-bjaelke.roed {
+      background: #dc4545;
+    }
+
+    #timer-status {
+      min-height: 1.4em;
+      margin: 9px 0 0;
+      color: #5f5367;
+      font-size: 0.92rem;
+      font-weight: 650;
+    }
+
+    #timer-status.udloebet {
+      color: #b42323;
+    }
+
+    #spil button {
+      background: var(--orange);
+    }
+
+    #tilbage {
+      margin-top: 18px;
+      background: transparent;
+      color: var(--purple);
+      border: 1px solid #c9b9dc;
+      box-shadow: none;
+    }
+
+    #tilbage:hover {
+      background: #eee5f7;
+      box-shadow: none;
+    }
+
+    #spil, #tilbage {
+      display: none;
+    }
+
+
+
+    .nytaar-panel {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #e7dccc;
+      text-align: left;
+    }
+    .nytaar-panel h2 { color: var(--purple); text-align: center; margin-top: 0; }
+    .nytaar-panel > p { line-height: 1.5; }
+    .deltager-sektion { margin: 20px 0; }
+    .deltager-sektion h3 { color: #342744; margin-bottom: 10px; }
+    .deltager-liste { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .deltager-valg { display:flex; align-items:center; gap:9px; background:#fffdf8; border:1px solid #e5d8c8; border-radius:10px; padding:10px; cursor:pointer; }
+    .deltager-valg input { width:18px; height:18px; accent-color:var(--purple); }
+    .nytaar-opgave { font-size:clamp(1.35rem, 3.8vw, 2rem); font-weight:750; line-height:1.4; text-align:center; margin:24px 0; }
+    .nytaar-fordeling { display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:12px; margin:18px 0; }
+    .nytaar-hold { background:#fffdf8; border:1px solid #e5d8c8; border-radius:14px; padding:15px; }
+    .nytaar-hold h3 { margin:0 0 8px; color:var(--purple); }
+    .nytaar-hold p { margin:5px 0; }
+    .nytaar-note { text-align:center; color:var(--muted-text); }
+    .fejlbesked { color:#b42323; font-weight:700; }
+    .tilbage-knap { background:transparent !important; color:var(--purple) !important; border:1px solid #c9b9dc !important; box-shadow:none !important; margin:10px 6px 0 0; }
+    @media (max-width:560px) { .deltager-liste { grid-template-columns:1fr; } }
+
+    @media (max-width: 560px) {
+      body {
+        justify-content: flex-start;
+        padding: 26px 12px 90px;
+      }
+
+      body::before {
+        top: 2vh;
+        right: -12px;
+        opacity: 0.55;
+      }
+
+      main {
+        padding: 27px 19px;
+        border-radius: 19px;
+      }
+
+      .button-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #start button {
+        width: 100%;
+        margin: 0;
+      }
+
+      .scene-decoration {
+        bottom: 8px;
+        padding: 0 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      button {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene-decoration" aria-hidden="true">
+    <span>🎃</span>
+    <span>🦇</span>
+    <span>🎃</span>
+  </div>
+
+  <main>
+    <p class="eyebrow">En aften med stærke holdninger</p>
+    <h1>Det store for-nytårsspil 2026-27:<span>Man har et standpunkt</span></h1>
+
+    <div id="start">
+      <p>Vælg den version, I vil spille.</p>
+      <div class="button-row">
+        <button onclick="vaelgVersion('foraeldre')">
+          Forældreversionen/GVFB
+        </button>
+        <button onclick="vaelgVersion('boern')">
+          Børneversionen/Paw Patrol/Bluey
+        </button>
+        <button onclick="visNytaarSetup()">
+          🎉 Nytårsdysten
+        </button>
+      </div>
+    </div>
+
+    <section id="nytaar-setup" class="nytaar-panel" style="display:none">
+      <h2>Nytårsdysten</h2>
+      <p>Vælg, hvem der er med i legen. Du kan vælge alle eller kun nogle af deltagerne.</p>
+      <div class="deltager-sektion">
+        <h3>Voksne</h3>
+        <div id="voksne-liste" class="deltager-liste"></div>
+      </div>
+      <div class="deltager-sektion">
+        <h3>Børn</h3>
+        <div id="boern-liste" class="deltager-liste"></div>
+      </div>
+      <p id="nytaar-fejl" class="fejlbesked" aria-live="polite"></p>
+      <div class="button-row">
+        <button onclick="vaelgAlleNytaar(true)">Vælg alle</button>
+        <button onclick="vaelgAlleNytaar(false)">Fravælg alle</button>
+        <button onclick="startNytaarsdyst()">Start Nytårsdysten</button>
+      </div>
+      <button class="tilbage-knap" onclick="tilbageFraNytaarSetup()">Tilbage til valg</button>
+    </section>
+
+    <section id="nytaar-spil" class="nytaar-panel" style="display:none">
+      <p class="eyebrow">Nytårsdysten</p>
+      <h2 id="nytaar-type"></h2>
+      <p id="nytaar-opgave" class="nytaar-opgave"></p>
+      <div id="nytaar-fordeling" class="nytaar-fordeling"></div>
+      <p id="nytaar-note" class="nytaar-note"></p>
+      <div class="button-row">
+        <button onclick="traekNytaarsopgave()">🎲 Træk næste opgave</button>
+      </div>
+      <button class="tilbage-knap" onclick="tilbageTilNytaarSetup()">Skift deltagere</button>
+      <button class="tilbage-knap" onclick="tilbageFraNytaarSetup()">Tilbage til valg</button>
+    </section>
+
+    <div id="spil">
+      <h2 id="overskrift"></h2>
+      <p id="saetning">Indlæser sætninger...</p>
+      <p id="argument-retning"></p>
+
+      <div class="timer" role="group" aria-label="Nedtælling på 45 sekunder">
+        <div class="timer-top">
+          <span>⏳ Tid til at diskutere!</span>
+          <span id="timer-tal" aria-live="off">00:45</span>
+        </div>
+        <div class="timer-spor" role="progressbar" aria-label="Tid tilbage" aria-valuemin="0" aria-valuemax="45" aria-valuenow="45" id="timer-spor">
+          <div id="timer-bjaelke"></div>
+        </div>
+        <p id="timer-status" aria-live="polite">Klar? Snakken starter nu!</p>
+      </div>
+
+      <button onclick="visSaetning()">Træk en sætning</button>
+    </div>
+
+    <button id="tilbage" onclick="gaaTilbage()">
+      Tilbage til valg
+    </button>
+  </main>
+
+  <script>
+    let saetninger = [];
+
+const argumentRetninger = [
+"👍 Argumentér FOR udsagnet",
+"😈 Djævlens advokat: Argumentér IMOD udsagnet"
+];
+    
+    const timerLaengde = 45;
+    let timerInterval = null;
+    let sekunderTilbage = timerLaengde;
+
+    function stopTimer() {
+      if (timerInterval !== null) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    function opdaterTimer() {
+      const minutter = Math.floor(sekunderTilbage / 60);
+      const sekunder = sekunderTilbage % 60;
+      document.getElementById("timer-tal").textContent =
+        String(minutter).padStart(2, "0") + ":" + String(sekunder).padStart(2, "0");
+
+      const procent = (sekunderTilbage / timerLaengde) * 100;
+      const bjaelke = document.getElementById("timer-bjaelke");
+      bjaelke.style.width = procent + "%";
+      bjaelke.classList.toggle("gul", sekunderTilbage <= 30 && sekunderTilbage > 15);
+      bjaelke.classList.toggle("roed", sekunderTilbage <= 15);
+
+      document.getElementById("timer-spor").setAttribute("aria-valuenow", sekunderTilbage);
+      document.getElementById("timer-tal").style.color =
+        sekunderTilbage <= 15 ? "#b42323" : sekunderTilbage <= 30 ? "#9a6700" : "#39803b";
+
+      const status = document.getElementById("timer-status");
+      status.classList.toggle("udloebet", sekunderTilbage === 0);
+      if (sekunderTilbage === 0) {
+        status.textContent = "⏰ Tiden er gået! Træk en ny sætning.";
+        stopTimer();
+      } else if (sekunderTilbage <= 10) {
+        status.textContent = "🔴 Sidste sekunder!";
+      } else if (sekunderTilbage <= 20) {
+        status.textContent = "🟡 Nu er der ikke så længe igen!";
+      } else {
+        status.textContent = "🟢 God tid endnu – fortsæt snakken!";
+      }
+    }
+
+    function startTimer() {
+      stopTimer();
+      sekunderTilbage = timerLaengde;
+      opdaterTimer();
+      timerInterval = setInterval(() => {
+        sekunderTilbage = Math.max(0, sekunderTilbage - 1);
+        opdaterTimer();
+      }, 1000);
+    }
+
+    function vaelgVersion(version) {
+      const fil = version === "boern"
+        ? "boern.txt"
+        : "saetninger.json";
+
+      document.getElementById("start").style.display = "none";
+      document.getElementById("spil").style.display = "block";
+      document.getElementById("tilbage").style.display = "inline-block";
+
+      document.getElementById("overskrift").textContent =
+        version === "boern" ? "Børneversionen" : "Forældreversionen";
+      document.getElementById("saetning").textContent =
+        "Indlæser sætninger...";
+
+      saetninger = [];
+      fetch(fil)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Filen blev ikke fundet: " + fil);
+          }
+          return response.text();
+        })
+        .then(tekst => {
+          saetninger = tekst
+            .split(/\r?\n/)
+            .map(linje => linje.trim())
+            .filter(linje => /^\d+\.\s/.test(linje))
+            .map(linje => linje.replace(/^\d+\.\s*/, ""));
+          if (saetninger.length === 0) {
+            throw new Error("Ingen nummererede sætninger fundet");
+          }
+
+          visSaetning();
+        })
+        .catch(error => {
+          document.getElementById("saetning").textContent =
+            "Kunne ikke indlæse sætningerne. Kontrollér filen.";
+          console.error(error);
+        });
+    }
+
+function visSaetning() {
+if (saetninger.length === 0) return;
+ 
+const nummer = Math.floor(Math.random() * saetninger.length);
+ 
+document.getElementById("saetning").textContent =
+saetninger[nummer];
+ 
+const retning =
+argumentRetninger[
+Math.floor(Math.random() * argumentRetninger.length)
+];
+ 
+document.getElementById("argument-retning").textContent =
+retning;
+ 
+startTimer();
+}
+    
+
+
+    // Nytårsdysten er et selvstændigt spil og ændrer ikke de to eksisterende versioner.
+    const nytaarVoksne = ["Rasmus", "Lars", "Christiane", "Signe", "Cecilie", "Theis"];
+    const nytaarBoern = ["Ole", "Per", "Solvej", "Dagmar", "Esther", "Else Marie", "Sven", "Gerda", "Konrad"];
+    const nytaarOpgaver = [
+      {type:"F", tekst:"Hvem kan slå flest 6’ere i 5 slag?"},
+      {type:"A", tekst:"Hvem kan slå flest 1’ere i 5 slag?"},
+      {type:"D", tekst:"Hvem gætter først, hvad en tilfældig voksen tegner?", tegner:"voksen"},
+      {type:"E", tekst:"Hvem gætter først, hvilken sang en tilfældig spiller nynner i hovedtelefoner?", nynner:true},
+      {type:"A", tekst:"Hvem har det længste hår?"},
+      {type:"C", tekst:"Hvem har det længste hår?"},
+      {type:"F", tekst:"Hvem har flest fingre?"},
+      {type:"F", tekst:"Hvilken far kan have flest børn ovenpå sig?"},
+      {type:"E", tekst:"Fortæl en “alle børnene”-vittighed."},
+      {type:"B", tekst:"Bygge LEGO i blinde – leg (spørg en voksen)."},
+      {type:"D", tekst:"Tæl til 20 i fællesskab uden at tælle i munden på hinanden."},
+      {type:"F", tekst:"Hvilket hold kan flest navne og steder fra Paw Patrol? Skriv dem hemmeligt ned på 3 minutter."},
+      {type:"F", tekst:"Hvilket hold kan flest navne og steder fra Bluey? Skriv dem hemmeligt ned på 3 minutter."},
+      {type:"D", tekst:"Hvem har den strengeste far?"}
+    ];
+    let valgteNytaarVoksne = [];
+    let valgteNytaarBoern = [];
+
+    function bland(liste) {
+      const kopi = [...liste];
+      for (let i = kopi.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [kopi[i], kopi[j]] = [kopi[j], kopi[i]];
+      }
+      return kopi;
+    }
+    function visNytaarSetup() {
+      document.getElementById("start").style.display = "none";
+      document.getElementById("spil").style.display = "none";
+      document.getElementById("tilbage").style.display = "none";
+      document.getElementById("nytaar-spil").style.display = "none";
+      document.getElementById("nytaar-setup").style.display = "block";
+      tegnDeltagerliste("voksne-liste", nytaarVoksne, "voksen");
+      tegnDeltagerliste("boern-liste", nytaarBoern, "barn");
+    }
+    function tegnDeltagerliste(elementId, navne, gruppe) {
+      const container = document.getElementById(elementId);
+      container.innerHTML = "";
+      navne.forEach(navn => {
+        const label = document.createElement("label");
+        label.className = "deltager-valg";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.checked = true;
+        input.dataset.gruppe = gruppe;
+        input.value = navn;
+        const tekst = document.createElement("span");
+        tekst.textContent = navn;
+        label.append(input, tekst);
+        container.appendChild(label);
+      });
+    }
+    function vaelgAlleNytaar(vaelg) {
+      document.querySelectorAll("#nytaar-setup input[type=checkbox]").forEach(input => input.checked = vaelg);
+    }
+    function startNytaarsdyst() {
+      valgteNytaarVoksne = [...document.querySelectorAll("#voksne-liste input:checked")].map(x => x.value);
+      valgteNytaarBoern = [...document.querySelectorAll("#boern-liste input:checked")].map(x => x.value);
+      if (valgteNytaarVoksne.length + valgteNytaarBoern.length < 2) {
+        document.getElementById("nytaar-fejl").textContent = "Vælg mindst to deltagere for at starte.";
+        return;
+      }
+      document.getElementById("nytaar-fejl").textContent = "";
+      document.getElementById("nytaar-setup").style.display = "none";
+      document.getElementById("nytaar-spil").style.display = "block";
+      traekNytaarsopgave();
+    }
+    function kort(titel, navne) {
+      const div = document.createElement("div");
+      div.className = "nytaar-hold";
+      const h = document.createElement("h3");
+      h.textContent = titel;
+      div.appendChild(h);
+      if (!navne.length) {
+        const p = document.createElement("p");
+        p.textContent = "Ingen deltagere valgt";
+        div.appendChild(p);
+      }
+      navne.forEach(navn => {
+        const p = document.createElement("p");
+        p.textContent = "• " + navn;
+        div.appendChild(p);
+      });
+      return div;
+    }
+    function visFordeling(opgave) {
+      const område = document.getElementById("nytaar-fordeling");
+      område.innerHTML = "";
+      const alle = bland([...valgteNytaarVoksne, ...valgteNytaarBoern]);
+      const voksne = bland(valgteNytaarVoksne);
+      const boern = bland(valgteNytaarBoern);
+      const note = document.getElementById("nytaar-note");
+      note.textContent = "";
+      if (opgave.type === "A") {
+        const blandet = bland(alle);
+        const midt = Math.ceil(blandet.length / 2);
+        område.append(kort("Hold 1", blandet.slice(0, midt)), kort("Hold 2", blandet.slice(midt)));
+      } else if (opgave.type === "B") {
+        const blandet = bland(alle);
+        const hold = [];
+        for (let i = 0; i < blandet.length; i += 2) hold.push(blandet.slice(i, i + 2));
+        if (hold.length && hold[hold.length - 1].length === 1 && hold.length > 1) {
+          hold[hold.length - 2].push(hold.pop()[0]);
+        }
+        hold.forEach((par, i) => område.appendChild(kort("Hold " + (i + 1), par)));
+        note.textContent = "Alle er med. Hvis antallet er ulige, får det sidste hold tre deltagere.";
+      } else if (opgave.type === "C") {
+        område.append(kort("Deltager 1", alle.length ? [alle[0]] : []), kort("Deltager 2", alle.length > 1 ? [alle[1]] : []));
+      } else if (opgave.type === "D") {
+        område.appendChild(kort("Alle deltager hver for sig", alle));
+        if (opgave.tegner) {
+          const tegner = voksne.length ? voksne[Math.floor(Math.random() * voksne.length)] : (alle[Math.floor(Math.random() * alle.length)] || "");
+          note.textContent = tegner ? tegner + " tegner; de andre gætter." : "Vælg mindst én voksen til tegneopgaven.";
+        }
+      } else if (opgave.type === "E") {
+        const udvalgt = alle[Math.floor(Math.random() * alle.length)];
+        område.appendChild(kort(opgave.nynner ? "Nynner" : "Udvalgt deltager", udvalgt ? [udvalgt] : []));
+        note.textContent = opgave.nynner ? "Den udvalgte nynner en sang med hovedtelefoner på; de øvrige deltagere gætter." : "Den udvalgte deltager leverer vittigheden.";
+      } else if (opgave.type === "F") {
+        område.append(kort("Børneholdet", boern), kort("Voksenholdet", voksne));
+        note.textContent = "Børnene spiller mod de voksne.";
+      }
+    }
+    function traekNytaarsopgave() {
+      if (!valgteNytaarVoksne.length && !valgteNytaarBoern.length) return;
+      const opgave = nytaarOpgaver[Math.floor(Math.random() * nytaarOpgaver.length)];
+      document.getElementById("nytaar-type").textContent = "Opgavetype " + opgave.type;
+      document.getElementById("nytaar-opgave").textContent = opgave.tekst;
+      visFordeling(opgave);
+    }
+    function tilbageTilNytaarSetup() {
+      document.getElementById("nytaar-spil").style.display = "none";
+      document.getElementById("nytaar-setup").style.display = "block";
+      document.querySelectorAll("#nytaar-setup input[type=checkbox]").forEach(input => {
+        input.checked = input.dataset.gruppe === "voksen"
+          ? valgteNytaarVoksne.includes(input.value)
+          : valgteNytaarBoern.includes(input.value);
+      });
+    }
+    function tilbageFraNytaarSetup() {
+      document.getElementById("nytaar-setup").style.display = "none";
+      document.getElementById("nytaar-spil").style.display = "none";
+      document.getElementById("start").style.display = "block";
+    }
+
+    function gaaTilbage() {
+      stopTimer();
+      sekunderTilbage = timerLaengde;
+      document.getElementById("timer-tal").textContent = "00:45";
+      document.getElementById("timer-bjaelke").style.width = "100%";
+      document.getElementById("timer-bjaelke").classList.remove("gul", "roed");
+      document.getElementById("timer-tal").style.color = "#39803b";
+      document.getElementById("timer-spor").setAttribute("aria-valuenow", timerLaengde);
+      document.getElementById("timer-status").textContent = "Klar? Snakken starter nu!";
+      document.getElementById("timer-status").classList.remove("udloebet");
+      document.getElementById("start").style.display = "block";
+      document.getElementById("spil").style.display = "none";
+      document.getElementById("tilbage").style.display = "none";
+
+        document.getElementById("argument-retning").textContent = "";
+
+    }
+  </script>
+
+</body>
+</html>
